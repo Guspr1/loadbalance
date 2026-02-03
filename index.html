@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mikrotik Multi-WAN PCC Generator</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background-color: #1e1e1e; color: #d4d4d4; padding: 20px; }
+        .container { max-width: 1000px; margin: 0 auto; background-color: #252526; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.6); overflow: hidden; }
+        
+        /* Tabs */
+        .tabs { display: flex; background-color: #333; border-bottom: 1px solid #444; }
+        .tab-btn { flex: 1; padding: 15px; background: none; border: none; color: #aaa; cursor: pointer; font-weight: bold; font-size: 1rem; transition: 0.3s; }
+        .tab-btn:hover { background-color: #3e3e42; color: white; }
+        .tab-btn.active { background-color: #252526; color: #4ec9b0; border-top: 3px solid #4ec9b0; }
+        
+        .tab-content { display: none; padding: 25px; }
+        .tab-content.active { display: block; animation: fadeIn 0.3s; }
+        
+        /* Forms */
+        .dynamic-list { display: flex; flex-direction: column; gap: 10px; }
+        .list-row { display: flex; gap: 10px; background: #2d2d30; padding: 15px; border-radius: 5px; border: 1px solid #3e3e42; align-items: flex-end; }
+        
+        .input-group { flex: 1; }
+        label { display: block; margin-bottom: 5px; font-size: 0.85em; color: #9cdcfe; }
+        input { width: 100%; padding: 8px; background-color: #3c3c3c; border: 1px solid #555; color: white; border-radius: 3px; box-sizing: border-box; }
+        input:focus { border-color: #007acc; outline: none; }
+        
+        /* Buttons */
+        .btn { padding: 8px 15px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; color: white; }
+        .btn-add { background-color: #4ec9b0; color: #1e1e1e; margin-top: 15px; width: 100%; }
+        .btn-del { background-color: #f44336; height: 35px; width: 35px; display: flex; align-items: center; justify-content: center; padding: 0; }
+        .btn-gen { background-color: #007acc; width: 100%; padding: 15px; font-size: 1.1em; margin-top: 20px; }
+        .btn-copy { background-color: #28a745; width: 100%; margin-top: 10px; }
+
+        textarea { width: 100%; height: 450px; background-color: #1e1e1e; color: #ce9178; border: 1px solid #444; padding: 15px; font-family: 'Consolas', monospace; margin-top: 15px; white-space: pre; border-radius: 5px; }
+        
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        h3 { border-bottom: 1px solid #444; padding-bottom: 10px; color: #569cd6; }
+        .info { font-size: 0.9em; color: #888; margin-bottom: 15px; font-style: italic; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab('tab-isp')">1. Daftar ISP (WAN)</button>
+        <button class="tab-btn" onclick="switchTab('tab-lan')">2. Daftar Lokal (LAN/VLAN)</button>
+        <button class="tab-btn" onclick="switchTab('tab-result')">3. Generate Script</button>
+    </div>
+
+    <div id="tab-isp" class="tab-content active">
+        <h3>Konfigurasi ISP (Sumber Internet)</h3>
+        <p class="info">Masukkan semua ISP yang Anda miliki. Tool ini akan menghitung beban bandwidth secara otomatis.</p>
+        
+        <div id="isp-container" class="dynamic-list">
+            <div class="list-row">
+                <div class="input-group">
+                    <label>Nama Interface</label>
+                    <input type="text" class="isp-iface" value="ether1-ISP-A">
+                </div>
+                <div class="input-group">
+                    <label>IP Address (ex: 192.168.1.2/24)</label>
+                    <input type="text" class="isp-ip" value="192.168.100.2/24">
+                </div>
+                <div class="input-group">
+                    <label>Gateway IP</label>
+                    <input type="text" class="isp-gw" value="192.168.100.1">
+                </div>
+                <div class="input-group" style="flex: 0.5;">
+                    <label>Speed (Mb)</label>
+                    <input type="number" class="isp-bw" value="20">
+                </div>
+                <button class="btn btn-del" onclick="removeRow(this)">X</button>
+            </div>
+             <div class="list-row">
+                <div class="input-group">
+                    <label>Nama Interface</label>
+                    <input type="text" class="isp-iface" value="ether2-ISP-B">
+                </div>
+                <div class="input-group">
+                    <label>IP Address</label>
+                    <input type="text" class="isp-ip" value="192.168.200.2/24">
+                </div>
+                <div class="input-group">
+                    <label>Gateway IP</label>
+                    <input type="text" class="isp-gw" value="192.168.200.1">
+                </div>
+                <div class="input-group" style="flex: 0.5;">
+                    <label>Speed (Mb)</label>
+                    <input type="number" class="isp-bw" value="30">
+                </div>
+                <button class="btn btn-del" onclick="removeRow(this)">X</button>
+            </div>
+        </div>
+        <button class="btn btn-add" onclick="addIspRow()">+ Tambah ISP Lain</button>
+    </div>
+
+    <div id="tab-lan" class="tab-content">
+        <h3>Konfigurasi Jaringan Lokal</h3>
+        <p class="info">Daftarkan semua interface lokal (Ethernet LAN atau VLAN) yang ingin di-loadbalance. Script akan menggabungkan mereka ke dalam Interface List "LAN_LIST".</p>
+        
+        <div id="lan-container" class="dynamic-list">
+            <div class="list-row">
+                <div class="input-group">
+                    <label>Nama Interface (ex: ether3 atau vlan10)</label>
+                    <input type="text" class="lan-iface" value="ether3-LAN">
+                </div>
+                <div class="input-group">
+                    <label>IP Gateway (ex: 192.168.2.1/24)</label>
+                    <input type="text" class="lan-ip" value="192.168.2.1/24">
+                </div>
+                <button class="btn btn-del" onclick="removeRow(this)">X</button>
+            </div>
+        </div>
+        <button class="btn btn-add" onclick="addLanRow()">+ Tambah Network Lokal</button>
+    </div>
+
+    <div id="tab-result" class="tab-content">
+        <h3>Hasil Script Mikrotik</h3>
+        <div id="calc-info" style="color:#4ec9b0; margin-bottom:10px; font-weight:bold;"></div>
+        <button class="btn btn-gen" onclick="generateScript()">GENERATE SCRIPT SEKARANG</button>
+        <textarea id="output" readonly placeholder="Klik tombol Generate di atas..."></textarea>
+        <button class="btn btn-copy" onclick="copyText()">Copy to Clipboard</button>
+    </div>
+</div>
+
+<script>
+    function switchTab(tabId) {
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById(tabId).classList.add('active');
+        event.target.classList.add('active');
+    }
+
+    function removeRow(btn) {
+        if(confirm("Hapus baris ini?")) btn.parentElement.remove();
+    }
+
+    function addIspRow() {
+        const div = document.createElement('div');
+        div.className = 'list-row';
+        div.innerHTML = `
+            <div class="input-group"><label>Nama Interface</label><input type="text" class="isp-iface" placeholder="etherX"></div>
+            <div class="input-group"><label>IP Address</label><input type="text" class="isp-ip" placeholder="IP/Netmask"></div>
+            <div class="input-group"><label>Gateway IP</label><input type="text" class="isp-gw" placeholder="IP Gateway"></div>
+            <div class="input-group" style="flex: 0.5;"><label>Speed (Mb)</label><input type="number" class="isp-bw" value="10"></div>
+            <button class="btn btn-del" onclick="removeRow(this)">X</button>
+        `;
+        document.getElementById('isp-container').appendChild(div);
+    }
+
+    function addLanRow() {
+        const div = document.createElement('div');
+        div.className = 'list-row';
+        div.innerHTML = `
+            <div class="input-group"><label>Nama Interface</label><input type="text" class="lan-iface" placeholder="ex: vlan20-Staff"></div>
+            <div class="input-group"><label>IP Gateway</label><input type="text" class="lan-ip" placeholder="192.168.X.1/24"></div>
+            <button class="btn btn-del" onclick="removeRow(this)">X</button>
+        `;
+        document.getElementById('lan-container').appendChild(div);
+    }
+
+    // Fungsi Matematika FPB untuk Ratio
+    function gcd(a, b) { return b == 0 ? a : gcd(b, a % b); }
+    function findGCD(arr) {
+        let result = arr[0];
+        for (let i = 1; i < arr.length; i++) result = gcd(arr[i], result);
+        return result;
+    }
+
+    function generateScript() {
+        let script = `/log info "Starting Multi-WAN PCC Script Generator"\n\n`;
+
+        // 1. Ambil Data ISP
+        let isps = [];
+        document.querySelectorAll('#isp-container .list-row').forEach((row, index) => {
+            isps.push({
+                name: `ISP-${index+1}`,
+                iface: row.querySelector('.isp-iface').value.trim(),
+                ip: row.querySelector('.isp-ip').value.trim(),
+                gw: row.querySelector('.isp-gw').value.trim(),
+                bw: parseInt(row.querySelector('.isp-bw').value) || 1
+            });
+        });
+
+        // 2. Ambil Data LAN
+        let lans = [];
+        document.querySelectorAll('#lan-container .list-row').forEach(row => {
+            lans.push({
+                iface: row.querySelector('.lan-iface').value.trim(),
+                ip: row.querySelector('.lan-ip').value.trim()
+            });
+        });
+
+        // Validasi
+        if(isps.length === 0 || lans.length === 0) {
+            alert("Mohon isi minimal 1 ISP dan 1 LAN");
+            return;
+        }
+
+        // 3. Setup Interface & Address
+        script += `# 1. SETUP INTERFACE LISTS & ADDRESSES\n`;
+        // Buat Interface List
+        script += `/interface list add name=WAN_LIST\n`;
+        script += `/interface list add name=LAN_LIST\n`;
+        
+        // Loop ISP
+        isps.forEach(isp => {
+            script += `/interface set [find default-name=${isp.iface}] name="${isp.iface}"\n`;
+            script += `/interface list member add interface="${isp.iface}" list=WAN_LIST\n`;
+            script += `/ip address add address=${isp.ip} interface="${isp.iface}" comment="${isp.name}"\n`;
+        });
+
+        // Loop LAN
+        lans.forEach(lan => {
+            // Cek apakah ini vlan atau ether fisik (simple check)
+            if(!lan.iface.toLowerCase().includes('vlan')) {
+                 script += `/interface set [find default-name=${lan.iface}] name="${lan.iface}"\n`;
+            }
+            script += `/interface list member add interface="${lan.iface}" list=LAN_LIST\n`;
+            script += `/ip address add address=${lan.ip} interface="${lan.iface}" comment="Local Network"\n`;
+        });
+
+        // 4. NAT & DNS
+        script += `\n# 2. NAT & DNS\n`;
+        script += `/ip dns set servers=8.8.8.8,8.8.4.4 allow-remote-requests=yes\n`;
+        script += `/ip firewall nat add chain=srcnat out-interface-list=WAN_LIST action=masquerade comment="Masquerade All WANs"\n`;
+
+        // 5. HITUNG PCC (LOGIKA INTI)
+        let bandwidths = isps.map(i => i.bw);
+        let commonDiv = findGCD(bandwidths);
+        let totalStreams = 0;
+        
+        isps.forEach(isp => {
+            isp.weight = isp.bw / commonDiv;
+            totalStreams += isp.weight;
+        });
+
+        document.getElementById('calc-info').innerText = 
+            `Total Stream PCC: ${totalStreams} bagian. (Distribusi per ISP berdasarkan speed)`;
+
+        script += `\n# 3. MANGLE RULES (PCC ${totalStreams} Streams)\n`;
+        script += `/ip firewall mangle\n`;
+
+        // Input Rules (Agar router bisa diakses dari luar)
+        isps.forEach(isp => {
+            script += `add chain=prerouting in-interface="${isp.iface}" connection-mark=no-mark action=mark-connection new-connection-mark=${isp.name}_conn passthrough=yes\n`;
+        });
+
+        // PCC Classifier
+        // Logic: Kita loop dari 0 sampai totalStream. Kita alokasikan jatah sesuai bobot ISP.
+        let currentStreamIndex = 0;
+        
+        isps.forEach(isp => {
+            for(let k=0; k < isp.weight; k++) {
+                script += `add chain=prerouting in-interface-list=LAN_LIST dst-address-type=!local per-connection-classifier=both-addresses-and-ports:${totalStreams}/${currentStreamIndex} connection-mark=no-mark action=mark-connection new-connection-mark=${isp.name}_conn passthrough=yes\n`;
+                currentStreamIndex++;
+            }
+        });
+
+        // Mark Routing
+        isps.forEach(isp => {
+            script += `add chain=prerouting in-interface-list=LAN_LIST connection-mark=${isp.name}_conn action=mark-routing new-routing-mark=to_${isp.name} passthrough=no\n`;
+            script += `add chain=output connection-mark=${isp.name}_conn action=mark-routing new-routing-mark=to_${isp.name} passthrough=no\n`;
+        });
+
+        // 6. ROUTING (FAILOVER)
+        script += `\n# 4. ROUTING & FAILOVER\n`;
+        script += `/ip route\n`;
+        
+        // Main Route (Marked)
+        isps.forEach(isp => {
+            script += `add dst-address=0.0.0.0/0 gateway=${isp.gw} distance=1 routing-mark=to_${isp.name} check-gateway=ping\n`;
+        });
+
+        // Backup Route (Unmarked / Failover)
+        // Kita urutkan ISP berdasarkan bandwidth terbesar jadi prioritas utama (distance terkecil)
+        let sortedISPs = [...isps].sort((a, b) => b.bw - a.bw);
+        sortedISPs.forEach((isp, index) => {
+            script += `add dst-address=0.0.0.0/0 gateway=${isp.gw} distance=${index + 1} check-gateway=ping comment="Failover Priority ${index+1}"\n`;
+        });
+
+        document.getElementById('output').value = script;
+    }
+
+    function copyText() {
+        const el = document.getElementById("output");
+        el.select();
+        navigator.clipboard.writeText(el.value);
+        alert("Script berhasil dicopy!");
+    }
+</script>
+
+</body>
+</html>
