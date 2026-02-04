@@ -3,34 +3,33 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Mikrotik PCC V4.5 (Final Enhanced)</title>
+<title>Mikrotik PCC V4.6 (Bugfix Mangle)</title>
 <style>
 body{font-family:sans-serif;background:#050505;color:#ccc;margin:0;padding:20px}
 *{box-sizing:border-box}
 .c{max-width:900px;margin:0 auto;background:#111;border:1px solid #333;border-radius:8px;box-shadow:0 20px 50px rgba(0,0,0,.8)}
 .h{padding:25px;text-align:center;background:linear-gradient(180deg,#1a1a1a 0,#111 100%);border-bottom:1px solid #333}
 h2{margin:0;color:#fff;font-size:22px}
-.sub{color:#00e676;font-size:11px;font-weight:700;letter-spacing:2px;margin-top:5px}
+.sub{color:#d32f2f;font-size:11px;font-weight:700;letter-spacing:2px;margin-top:5px}
 .cr{color:#555;font-size:12px;margin-top:5px}
 .t{display:flex;background:#222;border-bottom:1px solid #333}
 .tb{flex:1;padding:15px;cursor:pointer;background:0 0;border:0;color:#777;font-weight:700;transition:.2s}
 .tb:hover{color:#fff}
-.tb.a{color:#00e676;border-bottom:3px solid #00e676;background:#151515}
+.tb.a{color:#d32f2f;border-bottom:3px solid #d32f2f;background:#151515}
 .p{padding:25px;display:none}
 .p.a{display:block}
 .r{display:flex;gap:10px;margin-bottom:10px;background:#1a1a1a;padding:15px;border:1px solid #333;border-radius:4px;align-items:flex-end}
 .g{flex:1}
 label{display:block;font-size:10px;color:#888;margin-bottom:4px;font-weight:700}
 input{width:100%;background:#0a0a0a;border:1px solid #333;color:#fff;padding:8px;border-radius:3px}
-input:focus{border-color:#00e676;outline:0}
+input:focus{border-color:#d32f2f;outline:0}
 .btn{padding:10px;border:0;border-radius:3px;cursor:pointer;font-weight:700;color:#fff}
-.ba{width:100%;background:#00e676;color:#000}
-.bd{background:#d32f2f;width:35px}
+.ba{width:100%;background:#d32f2f;color:#fff}
+.bd{background:#444;width:35px}
 .bg{width:100%;background:#2962ff;margin-top:10px;padding:15px}
 .bc{width:100%;background:#2e7d32;margin-top:10px}
 .rg{display:flex;gap:15px;margin-bottom:20px;background:#1a1a1a;padding:15px;border:1px solid #333;border-radius:4px;color:#ccc;font-weight:700;font-size:13px;align-items:center}
 .ro{display:flex;align-items:center;gap:6px;cursor:pointer}
-/* Checkbox Custom Style */
 input[type=checkbox]{width:auto;margin:0}
 .sep{width:1px;height:20px;background:#444;margin:0 5px}
 textarea{width:100%;height:400px;background:#080808;color:#a9b7c6;border:1px solid #333;padding:15px;margin-top:15px;border-radius:4px;resize:vertical;font-family:monospace;font-size:11px}
@@ -43,7 +42,7 @@ textarea{width:100%;height:400px;background:#080808;color:#a9b7c6;border:1px sol
 <div class="c">
   <div class="h">
     <h2>MIKROTIK PCC GENERATOR</h2>
-    <div class="sub">V4.5 FINAL (UI ENHANCED)</div>
+    <div class="sub">V4.6 STABLE (CONTEXT FIXED)</div>
     <div class="cr">Created by Muhammad Bagus Pribadi</div>
   </div>
 
@@ -55,7 +54,7 @@ textarea{width:100%;height:400px;background:#080808;color:#a9b7c6;border:1px sol
 
   <div id="p1" class="p a">
     <div class="rg">
-      <div style="color:#00e676">TARGET OS:</div>
+      <div style="color:#d32f2f">TARGET OS:</div>
       <label class="ro"><input type="radio" name="ros" value="v6" checked> v6</label>
       <label class="ro"><input type="radio" name="ros" value="v7"> v7</label>
       <div class="sep"></div>
@@ -115,7 +114,7 @@ const _0x5a2f=[
 '.r','#lw','#ll','.if','.ip','.gw','.bw','.lif','.lip','Data Kurang!',
 'LOC','WAN_LIST','LAN_LIST','fasttrack-connection','both-addresses-and-ports',
 'v7','v6',
-'Start PCC V4.5 (Enhanced)', 'Copied!', '%', 'conn_', 'to_'
+'Start PCC V4.6 (Stable)', 'Copied!', '%', 'conn_', 'to_'
 ];
 const _=(i)=>_0x5a2f[i];
 const D=window[_('0')];
@@ -143,8 +142,6 @@ const G=(a,b)=>b==0?a:G(b,a%b);
 
 window._gn=function(){
 let w=[],l=[],rv=D.querySelector(_(3))[_('10')];
-
-// NEW: Read Checkbox Status
 let use_fix = I('sgw').checked;
 
 Q(_(14)+' '+_(13)).forEach((r,k)=>{
@@ -171,10 +168,15 @@ for(let i=1;i<bs[_('12')];i++)g=G(bs[i],g);
 let T=0;w.forEach(x=>{x.r=x.b/g;T+=x.r});
 I('st').innerText='ROS: '+rv.toUpperCase()+' | Streams: '+T+' | Ratio: '+w.map(x=>x.r).join(':');
 
-let s='# PCC V4.5 ENHANCED ('+rv.toUpperCase()+')\n# Created By Muhammad Bagus Pribadi\n/log info "'+_(30)+'"\n/interface list add name='+_(24)+'\n/interface list add name='+_(25)+'\n/ip firewall address-list\nadd list='+_(23)+' address=192.168.0.0/16\nadd list='+_(23)+' address=10.0.0.0/8\nadd list='+_(23)+' address=172.16.0.0/12\n/ip firewall filter disable [find action='+_(26)+']\n/ip dns set servers=8.8.8.8,1.1.1.1 allow-remote-requests=yes\n';
+let s='# PCC V4.6 STABLE ('+rv.toUpperCase()+')\n# Created By Muhammad Bagus Pribadi\n/log info "'+_(30)+'"\n/interface list add name='+_(24)+'\n/interface list add name='+_(25)+'\n/ip firewall address-list\nadd list='+_(23)+' address=192.168.0.0/16\nadd list='+_(23)+' address=10.0.0.0/8\nadd list='+_(23)+' address=172.16.0.0/12\n/ip firewall filter disable [find action='+_(26)+']\n/ip dns set servers=8.8.8.8,1.1.1.1 allow-remote-requests=yes\n';
 
 w.forEach(x=>{
-s+='/interface set [find default-name='+x.f+'] name="'+x.f+'"\n/interface list member add interface="'+x.f+'" list='+_(24)+'\n/ip address add address='+x.i+' interface="'+x.f+'" comment="'+x.n+'"\n/ip firewall nat add chain=srcnat out-interface="'+x.f+'" action=masquerade comment="NAT-'+x.n+'"\nadd chain=input in-interface="'+x.f+'" action=mark-connection new-connection-mark='+x.cm+' passthrough=yes\nadd chain=output connection-mark='+x.cm+' action=mark-routing new-routing-mark='+x.rm+' passthrough=no\n';
+// BASIC CONFIG
+s+='/interface set [find default-name='+x.f+'] name="'+x.f+'"\n/interface list member add interface="'+x.f+'" list='+_(24)+'\n/ip address add address='+x.i+' interface="'+x.f+'" comment="'+x.n+'"\n/ip firewall nat add chain=srcnat out-interface="'+x.f+'" action=masquerade comment="NAT-'+x.n+'"\n';
+
+// FIX: PINDAH KE MANGLE DULU SEBELUM MARKING!
+s+='/ip firewall mangle\n'; 
+s+='add chain=input in-interface="'+x.f+'" action=mark-connection new-connection-mark='+x.cm+' passthrough=yes\nadd chain=output connection-mark='+x.cm+' action=mark-routing new-routing-mark='+x.rm+' passthrough=no\n';
 });
 
 l.forEach(x=>{
@@ -198,19 +200,13 @@ w.forEach(x=>{s+='add name='+x.rm+' fib\n';});
 }
 
 s+='/ip route\n';
-// LOGIC CHECKBOX APPLIED HERE
 w.forEach(x=>{
     let m=rv===_(28)?'routing-table=':'routing-mark=';
-    
-    // Logic: Kalau Checkbox ON, tambahkan %Interface, kalau OFF kosong
     let suffix = use_fix ? _(32)+x.f : ''; 
     let gw = x.g + suffix;
-
     s+='add dst-address=0.0.0.0/0 gateway='+gw+' distance=1 '+m+x.rm+' check-gateway=ping\n';
-    
     w.forEach(b=>{
         if(x.n!==b.n){
-            // Failover juga ikut logic checkbox
             let suffixB = use_fix ? _(32)+b.f : '';
             let gwb = b.g + suffixB;
             s+='add dst-address=0.0.0.0/0 gateway='+gwb+' distance=2 '+m+x.rm+' check-gateway=ping\n';
