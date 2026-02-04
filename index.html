@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Mikrotik PCC V4.2 (Universal Protected)</title>
+<title>Mikrotik PCC ROS 6 DAN ROS 7 (Dengan Fitur Same Gateway) </title>
 <style>
 body{font-family:sans-serif;background:#050505;color:#ccc;margin:0;padding:20px}
 *{box-sizing:border-box}
@@ -40,7 +40,7 @@ textarea{width:100%;height:400px;background:#080808;color:#a9b7c6;border:1px sol
 <div class="c">
   <div class="h">
     <h2>MIKROTIK PCC GENERATOR</h2>
-    <div class="sub">V4.2 UNIVERSAL (PROTECTED)</div>
+    <div class="sub">V4.3 UNIVERSAL (SAME-GW PATCH)</div>
     <div class="cr">Created by Muhammad Bagus Pribadi</div>
   </div>
 
@@ -67,8 +67,8 @@ textarea{width:100%;height:400px;background:#080808;color:#a9b7c6;border:1px sol
       </div>
       <div class="r">
         <div class="g"><label>Interface</label><input class="if" value="ether2-ISP-B"></div>
-        <div class="g"><label>IP</label><input class="ip" value="192.168.200.2/24"></div>
-        <div class="g"><label>Gateway</label><input class="gw" value="192.168.200.1"></div>
+        <div class="g"><label>IP</label><input class="ip" value="192.168.100.2/24"></div>
+        <div class="g"><label>Gateway</label><input class="gw" value="192.168.100.1"></div>
         <div class="g" style="flex:.4"><label>Mb</label><input type="number" class="bw" value="30"></div>
         <button class="btn bd" onclick="_z(this)">×</button>
       </div>
@@ -102,13 +102,17 @@ textarea{width:100%;height:400px;background:#080808;color:#a9b7c6;border:1px sol
 
 <script>
 (function(){
+/* Protection Logic: 
+  Logic calculation remains clean for performance.
+  String mapping is used to protect credit.
+*/
 const _0x5a2f=[
 'document','querySelectorAll','getElementById','input[name="ros"]:checked',
 '.p','.tb','a','classList','remove','add','value','trim','length',
 '.r','#lw','#ll','.if','.ip','.gw','.bw','.lif','.lip','Data Kurang!',
 'LOC','WAN_LIST','LAN_LIST','fasttrack-connection','both-addresses-and-ports',
 'routing-mark','routing-table','fib','v7','v6','ISP-','_conn','to_',
-'Start PCC V4.2','Copied!'
+'Start PCC V4.3','Copied!','%'
 ];
 const _=(i)=>_0x5a2f[i];
 const D=window[_('0')];
@@ -137,7 +141,7 @@ const G=(a,b)=>b==0?a:G(b,a%b);
 window._gn=function(){
 let w=[],l=[],rv=D.querySelector(_(3))[_('10')];
 Q(_(14)+' '+_(13)).forEach((r,k)=>{
-w.push({n:_(31)+(k+1),
+w.push({n:_(32)+(k+1),
 f:r.querySelector(_(16))[_('10')][_('11')](),
 i:r.querySelector(_(17))[_('10')][_('11')](),
 g:r.querySelector(_(18))[_('10')][_('11')](),
@@ -154,10 +158,10 @@ for(let i=1;i<bs[_('12')];i++)g=G(bs[i],g);
 let T=0;w.forEach(x=>{x.r=x.b/g;T+=x.r});
 I('st').innerText='ROS: '+rv.toUpperCase()+' | Streams: '+T+' | Ratio: '+w.map(x=>x.r).join(':');
 
-let s='# PCC V4.2 UNIVERSAL ('+rv.toUpperCase()+') PROTECTED\n# Created By Muhammad Bagus Pribadi\n/log info "'+_(37)+'"\n/interface list add name='+_(24)+'\n/interface list add name='+_(25)+'\n/ip firewall address-list\nadd list='+_(23)+' address=192.168.0.0/16\nadd list='+_(23)+' address=10.0.0.0/8\nadd list='+_(23)+' address=172.16.0.0/12\n/ip firewall filter disable [find action='+_(26)+']\n/ip dns set servers=8.8.8.8,1.1.1.1 allow-remote-requests=yes\n';
+let s='# PCC V4.3 UNIVERSAL ('+rv.toUpperCase()+')\n# Created By Muhammad Bagus Pribadi\n/log info "'+_(36)+'"\n/interface list add name='+_(24)+'\n/interface list add name='+_(25)+'\n/ip firewall address-list\nadd list='+_(23)+' address=192.168.0.0/16\nadd list='+_(23)+' address=10.0.0.0/8\nadd list='+_(23)+' address=172.16.0.0/12\n/ip firewall filter disable [find action='+_(26)+']\n/ip dns set servers=8.8.8.8,1.1.1.1 allow-remote-requests=yes\n';
 
 w.forEach(x=>{
-s+='/interface set [find default-name='+x.f+'] name="'+x.f+'"\n/interface list member add interface="'+x.f+'" list='+_(24)+'\n/ip address add address='+x.i+' interface="'+x.f+'" comment="'+x.n+'"\n/ip firewall nat add chain=srcnat out-interface="'+x.f+'" action=masquerade comment="NAT-'+x.n+'"\nadd chain=input in-interface="'+x.f+'" action=mark-connection new-connection-mark='+x.n+_(32)+' passthrough=yes\nadd chain=output connection-mark='+x.n+_(32)+' action=mark-routing new-routing-mark='+_(33)+x.n+' passthrough=no\n';
+s+='/interface set [find default-name='+x.f+'] name="'+x.f+'"\n/interface list member add interface="'+x.f+'" list='+_(24)+'\n/ip address add address='+x.i+' interface="'+x.f+'" comment="'+x.n+'"\n/ip firewall nat add chain=srcnat out-interface="'+x.f+'" action=masquerade comment="NAT-'+x.n+'"\nadd chain=input in-interface="'+x.f+'" action=mark-connection new-connection-mark='+x.n+_(33)+' passthrough=yes\nadd chain=output connection-mark='+x.n+_(33)+' action=mark-routing new-routing-mark='+_(34)+x.n+' passthrough=no\n';
 });
 l.forEach(x=>{
 if(!x.f.toLowerCase().includes('vlan'))s+='/interface set [find default-name='+x.f+'] name="'+x.f+'"\n';
@@ -167,27 +171,32 @@ s+='/ip firewall mangle\nadd chain=prerouting dst-address-type=local action=acce
 let c=0;
 w.forEach(x=>{
 for(let k=0;k<x.r;k++){
-s+='add chain=prerouting in-interface-list='+_(25)+' dst-address-list=!'+_(23)+' per-connection-classifier='+_(27)+':'+T+'/'+c+' connection-mark=no-mark action=mark-connection new-connection-mark='+x.n+_(32)+' passthrough=yes\n';
+s+='add chain=prerouting in-interface-list='+_(25)+' dst-address-list=!'+_(23)+' per-connection-classifier='+_(27)+':'+T+'/'+c+' connection-mark=no-mark action=mark-connection new-connection-mark='+x.n+_(33)+' passthrough=yes\n';
 c++;
 }
-s+='add chain=prerouting in-interface-list='+_(25)+' connection-mark='+x.n+_(32)+' action=mark-routing new-routing-mark='+_(33)+x.n+' passthrough=no\n';
+s+='add chain=prerouting in-interface-list='+_(25)+' connection-mark='+x.n+_(33)+' action=mark-routing new-routing-mark='+_(34)+x.n+' passthrough=no\n';
 });
 if(rv===_(35)){
 s+='/routing table\n';
-w.forEach(x=>{s+='add name='+_(33)+x.n+' '+_(36)+'\n';});
+w.forEach(x=>{s+='add name='+_(34)+x.n+' '+_(30)+'\n';});
 }
 s+='/ip route\n';
+
+// LOGIC ROUTE PATCHED FOR SAME GATEWAY
 w.forEach(x=>{
 let m=rv===_(35)?'routing-table=':'routing-mark=';
-s+='add dst-address=0.0.0.0/0 gateway='+x.g+' distance=1 '+m+_(33)+x.n+' check-gateway=ping\n';
+let gw=x.g+_(38)+x.f; // Syntax: IP%Interface
+s+='add dst-address=0.0.0.0/0 gateway='+gw+' distance=1 '+m+_(34)+x.n+' check-gateway=ping\n';
 w.forEach(b=>{
 if(x.n!==b.n){
-s+='add dst-address=0.0.0.0/0 gateway='+b.g+' distance=2 '+m+_(33)+x.n+' check-gateway=ping\n';
+let gwb=b.g+_(38)+b.f; // Syntax: IP%Interface
+s+='add dst-address=0.0.0.0/0 gateway='+gwb+' distance=2 '+m+_(34)+x.n+' check-gateway=ping\n';
 }
 });
 });
 w.sort((a,b)=>b.b-a.b).forEach((x,i)=>{
-s+='add dst-address=0.0.0.0/0 gateway='+x.g+' distance='+(i+1)+' check-gateway=ping\n';
+let gw=x.g+_(38)+x.f; // Syntax: IP%Interface
+s+='add dst-address=0.0.0.0/0 gateway='+gw+' distance='+(i+1)+' check-gateway=ping\n';
 });
 s+='\n# SECURITY PATCH\n/ip firewall filter\nadd chain=input protocol=udp dst-port=53 in-interface-list='+_(24)+' action=drop\nadd chain=input protocol=tcp dst-port=53 in-interface-list='+_(24)+' action=drop\n';
 I('ou').value=s;
@@ -195,11 +204,10 @@ I('ou').value=s;
 
 window._cp=function(){
 let e=I('ou');e.select();navigator.clipboard.writeText(e.value);
-alert(_(38));
+alert(_(37));
 };
 })();
 </script>
 
 </body>
 </html>
-
