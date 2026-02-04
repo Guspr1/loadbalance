@@ -1,27 +1,209 @@
-<!DOCTYPE html><html lang="id"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Mikrotik PCC ULTIMATE</title><style>body{font-family:'Segoe UI',sans-serif;background:#121212;color:#e0e0e0;padding:20px;margin:0}a{text-decoration:none}.container{max-width:1000px;margin:0 auto;background:#1e1e1e;border-radius:8px;box-shadow:0 8px 30px rgba(0,0,0,0.5);border:1px solid #333}.header{padding:25px;text-align:center;background:#252526;border-bottom:1px solid #333}h2{margin:0 0 5px;color:#00bd7e;letter-spacing:1px}.credit{color:#888;font-size:14px;font-weight:500}.tabs{display:flex;background:#2d2d30;border-bottom:1px solid #444}.tab-btn{flex:1;padding:15px;background:0 0;border:0;color:#aaa;cursor:pointer;font-weight:700;transition:.3s}.tab-btn:hover{background:#3e3e42;color:#fff}.tab-btn.active{background:#1e1e1e;color:#00bd7e;border-top:3px solid #00bd7e}.tab-content{display:none;padding:30px}.tab-content.active{display:block;animation:fadeIn .4s}.list-row{display:flex;gap:15px;background:#2b2b2b;padding:15px;border-radius:6px;border:1px solid #3e3e42;align-items:flex-end;margin-bottom:10px}.input-group{flex:1}label{display:block;margin-bottom:6px;font-size:.85em;color:#9cdcfe}input{width:100%;padding:10px;background:#333;border:1px solid #555;color:#fff;border-radius:4px;box-sizing:border-box}input:focus{border-color:#00bd7e;outline:0}.btn{padding:10px 15px;border:0;border-radius:4px;cursor:pointer;font-weight:700;color:#fff}.btn-add{background:#00bd7e;color:#121212;width:100%}.btn-del{background:#d32f2f;width:40px;height:40px}.btn-gen{background:#2196f3;width:100%;padding:15px;font-size:1.1em;margin-top:20px}.btn-copy{background:#4caf50;width:100%;margin-top:10px}textarea{width:100%;height:450px;background:#0d0d0d;color:#a9b7c6;border:1px solid #333;padding:15px;font-family:'Consolas',monospace;margin-top:15px;white-space:pre;border-radius:5px;font-size:13px}@keyframes fadeIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}.footer{text-align:center;padding:20px;border-top:1px solid #333;background:#252526}.donate-btn{background:#faae2b;color:#1e1e1e;padding:10px 20px;border-radius:5px;font-weight:bold;display:inline-flex;align-items:center;gap:8px;transition:.2s}.donate-btn:hover{transform:translateY(-2px);box-shadow:0 4px 15px rgba(250,174,43,.4)}</style></head><body>
+<!DOCTYPE html><html lang="id"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Mikrotik PCC Generator V4.1</title><style>body{font-family:'Segoe UI',Roboto,Helvetica,sans-serif;background:#050505;color:#ccc;margin:0;padding:20px;line-height:1.6}*{box-sizing:border-box}.container{max-width:950px;margin:0 auto;background:#111;border:1px solid #333;border-radius:10px;box-shadow:0 20px 50px rgba(0,0,0,0.8)}.header{padding:30px;text-align:center;background:linear-gradient(180deg,#1a1a1a 0%,#111 100%);border-bottom:1px solid #333}h2{margin:0;color:#fff;font-weight:800;letter-spacing:1px;font-size:24px}.subtitle{color:#00e676;font-size:12px;font-weight:700;letter-spacing:2px;margin-top:5px;text-transform:uppercase}.credit{color:#666;font-size:13px;margin-top:5px}.tabs{display:flex;background:#222;border-bottom:1px solid #333}.tab-btn{flex:1;padding:15px;cursor:pointer;background:0 0;border:none;color:#777;font-weight:700;font-size:13px;text-transform:uppercase;transition:.2s}.tab-btn:hover{color:#fff;background:#2a2a2a}.tab-btn.active{color:#00e676;border-bottom:3px solid #00e676;background:#151515}.content{padding:30px;display:none;animation:fadeIn .3s}.content.active{display:block}.row{display:flex;gap:10px;margin-bottom:10px;background:#1a1a1a;padding:15px;border:1px solid #333;border-radius:6px;align-items:flex-end}.grp{flex:1}label{display:block;font-size:10px;color:#888;margin-bottom:5px;text-transform:uppercase;font-weight:700}input{width:100%;background:#0a0a0a;border:1px solid #333;color:#fff;padding:10px;border-radius:4px;font-family:'Consolas',monospace}input:focus{border-color:#00e676;outline:none}.btn{padding:12px;border:none;border-radius:5px;cursor:pointer;font-weight:700;font-size:13px;transition:.2s}.btn-add{width:100%;background:#00e676;color:#000}.btn-del{background:#d32f2f;color:#fff;width:40px}.btn-gen{width:100%;background:#2962ff;color:#fff;font-size:15px;padding:15px;margin-top:10px}.btn-copy{width:100%;background:#2e7d32;color:#fff;margin-top:10px}textarea{width:100%;height:450px;background:#080808;color:#a9b7c6;border:1px solid #333;padding:15px;font-family:'Consolas',monospace;font-size:12px;margin-top:20px;white-space:pre;border-radius:5px;resize:vertical}.footer{padding:20px;text-align:center;border-top:1px solid #333;background:#151515;font-size:13px;color:#666}.donate{display:inline-flex;align-items:center;gap:8px;background:#ffb300;color:#000;padding:8px 20px;border-radius:50px;font-weight:700;text-decoration:none;margin-top:10px;transition:.2s}.donate:hover{transform:translateY(-2px);box-shadow:0 5px 15px rgba(255,179,0,0.2)}@keyframes fadeIn{from{opacity:0}to{opacity:1}}</style></head><body>
 <div class="container">
-<div class="header"><h2>MIKROTIK PCC ULTIMATE V3</h2><div class="credit">Created By Muhammad Bagus Pribadi</div></div>
-<div class="tabs"><button class="tab-btn active" onclick="_t('t1',this)">1. ISP (WAN)</button><button class="tab-btn" onclick="_t('t2',this)">2. LAN (VLAN)</button><button class="tab-btn" onclick="_t('t3',this)">3. GET SCRIPT</button></div>
-<div id="t1" class="tab-content active"><h3 style="color:#00bd7e;border-bottom:1px solid #444;padding-bottom:10px">ISP / WAN Configuration</h3><div id="c1">
-<div class="list-row"><div class="input-group"><label>Interface Name</label><input type="text" class="i-if" value="ether1-ISP-A"></div><div class="input-group"><label>IP Address</label><input type="text" class="i-ip" value="192.168.100.2/24"></div><div class="input-group"><label>Gateway</label><input type="text" class="i-gw" value="192.168.100.1"></div><div class="input-group" style="flex:.5"><label>Mb</label><input type="number" class="i-bw" value="20"></div><button class="btn btn-del" onclick="_d(this)">X</button></div>
-<div class="list-row"><div class="input-group"><label>Interface Name</label><input type="text" class="i-if" value="ether2-ISP-B"></div><div class="input-group"><label>IP Address</label><input type="text" class="i-ip" value="192.168.200.2/24"></div><div class="input-group"><label>Gateway</label><input type="text" class="i-gw" value="192.168.200.1"></div><div class="input-group" style="flex:.5"><label>Mb</label><input type="number" class="i-bw" value="30"></div><button class="btn btn-del" onclick="_d(this)">X</button></div>
-</div><button class="btn btn-add" onclick="_a1()">+ TAMBAH ISP</button></div>
-<div id="t2" class="tab-content"><h3 style="color:#00bd7e;border-bottom:1px solid #444;padding-bottom:10px">LAN / Local Network</h3><div id="c2">
-<div class="list-row"><div class="input-group"><label>Interface Name</label><input type="text" class="l-if" value="ether3-LAN"></div><div class="input-group"><label>IP Gateway</label><input type="text" class="l-ip" value="192.168.2.1/24"></div><button class="btn btn-del" onclick="_d(this)">X</button></div>
-</div><button class="btn btn-add" onclick="_a2()">+ TAMBAH NETWORK LOKAL</button></div>
-<div id="t3" class="tab-content"><h3 style="color:#00bd7e;border-bottom:1px solid #444;padding-bottom:10px">Generated Script</h3><div id="inf" style="color:#aaa;margin-bottom:10px;font-weight:500"></div><button class="btn btn-gen" onclick="_g()">GENERATE ULTIMATE SCRIPT</button><textarea id="out" readonly placeholder="Script anti-blackhole akan muncul di sini..."></textarea><button class="btn btn-copy" onclick="_c()">COPY TO CLIPBOARD</button></div>
-<div class="footer"><p style="color:#666;font-size:12px;margin-bottom:10px">Support Developer:</p><a href="https://saweria.co/SigmaRule" target="_blank" class="donate-btn">🎁 Saweria (SigmaRule)</a></div>
-</div><script>
-const D=document;function _t(i,e){D.querySelectorAll('.tab-content').forEach(x=>x.classList.remove('active'));D.querySelectorAll('.tab-btn').forEach(x=>x.classList.remove('active'));D.getElementById(i).classList.add('active');e.classList.add('active')}
-function _d(b){if(confirm("Hapus baris?"))b.parentElement.remove()}
-function _a1(){let d=D.createElement('div');d.className='list-row';d.innerHTML=`<div class="input-group"><label>Interface</label><input type="text" class="i-if"></div><div class="input-group"><label>IP</label><input type="text" class="i-ip"></div><div class="input-group"><label>Gateway</label><input type="text" class="i-gw"></div><div class="input-group" style="flex:.5"><label>Mb</label><input type="number" class="i-bw" value="10"></div><button class="btn btn-del" onclick="_d(this)">X</button>`;D.getElementById('c1').appendChild(d)}
-function _a2(){let d=D.createElement('div');d.className='list-row';d.innerHTML=`<div class="input-group"><label>Interface</label><input type="text" class="l-if"></div><div class="input-group"><label>IP</label><input type="text" class="l-ip"></div><button class="btn btn-del" onclick="_d(this)">X</button>`;D.getElementById('c2').appendChild(d)}
-function _gcd(a,b){return b==0?a:_gcd(b,a%b)}
-function _g(){let s=`# GENERATED BY MUHAMMAD BAGUS PRIBADI\n# ULTIMATE PCC V3 (Failover+LeakProof)\n\n`,I=[],L=[],q=D.querySelectorAll;q.call(D,'#c1 .list-row').forEach((r,x)=>{I.push({n:`ISP-${x+1}`,f:r.querySelector('.i-if').value.trim(),i:r.querySelector('.i-ip').value.trim(),g:r.querySelector('.i-gw').value.trim(),b:parseInt(r.querySelector('.i-bw').value)||1})});q.call(D,'#c2 .list-row').forEach(r=>{L.push({f:r.querySelector('.l-if').value.trim(),i:r.querySelector('.l-ip').value.trim()})});if(I.length==0||L.length==0){alert("Data belum lengkap!");return}
-s+=`/log info "Applying Ultimate PCC Logic by Bagus Pribadi..."\n\n`;s+=`# [1] PREPARATION (Interfaces & IPs)\n/interface list add name=WAN_LIST\n/interface list add name=LAN_LIST\n`;I.forEach(x=>{s+=`/interface set [find default-name=${x.f}] name="${x.f}"\n/interface list member add interface="${x.f}" list=WAN_LIST\n/ip address add address=${x.i} interface="${x.f}" comment="${x.n}"\n`});L.forEach(x=>{if(!x.f.toLowerCase().includes('vlan'))s+=`/interface set [find default-name=${x.f}] name="${x.f}"\n`;s+=`/interface list member add interface="${x.f}" list=LAN_LIST\n/ip address add address=${x.i} interface="${x.f}" comment="Local"\n`});
-s+=`\n# [2] SECURITY & LOCAL BYPASS (Leak Proof)\n/ip dns set servers=8.8.8.8,1.1.1.1 allow-remote-requests=yes\n/ip firewall nat add chain=srcnat out-interface-list=WAN_LIST action=masquerade\n`;s+=`/ip firewall address-list\nadd list=LOCAL_NET address=192.168.0.0/16\nadd list=LOCAL_NET address=10.0.0.0/8\nadd list=LOCAL_NET address=172.16.0.0/12\n`;
-let B=I.map(x=>x.b),G=B[0];for(let i=1;i<B.length;i++)G=_gcd(B[i],G);let T=0;I.forEach(x=>{x.w=x.b/G;T+=x.w});D.getElementById('inf').innerText=`Analysis: ${I.length} WANs, Total ${T} PCC Streams.`;
-s+=`\n# [3] MANGLE RULES (Optimized)\n/ip firewall mangle\n`;s+=`# 3A. Accept Local Traffic (Jangan di-loadbalance)\nadd chain=prerouting dst-address-list=LOCAL_NET action=accept comment="Bypass Local Traffic"\n`;s+=`# 3B. Input Connection (Agar Router bisa diremote dari luar)\n`;I.forEach(x=>{s+=`add chain=prerouting in-interface="${x.f}" connection-state=new action=mark-connection new-connection-mark=${x.n}_conn passthrough=yes\n`});s+=`# 3C. PCC Classification\n`;let c=0;I.forEach(x=>{for(let k=0;k<x.w;k++){s+=`add chain=prerouting in-interface-list=LAN_LIST dst-address-list=!LOCAL_NET per-connection-classifier=both-addresses-and-ports:${T}/${c} connection-mark=no-mark action=mark-connection new-connection-mark=${x.n}_conn passthrough=yes\n`;c++}});s+=`# 3D. Mark Routing\n`;I.forEach(x=>{s+=`add chain=prerouting in-interface-list=LAN_LIST connection-mark=${x.n}_conn action=mark-routing new-routing-mark=to_${x.n} passthrough=no\nadd chain=output connection-mark=${x.n}_conn action=mark-routing new-routing-mark=to_${x.n} passthrough=no\n`});
-s+=`\n# [4] ROUTING & ADVANCED FAILOVER (Anti-Blackhole)\n/ip route\n`;I.forEach(x=>{s+=`# Main Route for ${x.n}\nadd dst-address=0.0.0.0/0 gateway=${x.g} distance=1 routing-mark=to_${x.n} check-gateway=ping\n`;s+=`# Backup Routes for ${x.n} (Cross-Failover)\n`;I.forEach(b=>{if(x.n!==b.n){s+=`add dst-address=0.0.0.0/0 gateway=${b.g} distance=2 routing-mark=to_${x.n} check-gateway=ping comment="Backup via ${b.n}"\n`}})});s+=`\n# [5] DEFAULT ROUTES (Untuk Router Update/Traffic tanpa mark)\n`;I.sort((a,b)=>b.b-a.b).forEach((x,i)=>{s+=`add dst-address=0.0.0.0/0 gateway=${x.g} distance=${i+1} check-gateway=ping\n`});D.getElementById('out').value=s}
-function _c(){let e=D.getElementById("out");e.select();navigator.clipboard.writeText(e.value);alert("Script berhasil dicopy! Siap deploy.")}
+    <div class="header">
+        <h2>MIKROTIK PCC GENERATOR</h2>
+        <div class="subtitle">Production Grade V4.1</div>
+        <div class="credit">Developed by Muhammad Bagus Pribadi</div>
+    </div>
+    <div class="tabs">
+        <button class="tab-btn active" onclick="tab('t1',this)">1. WAN Setup</button>
+        <button class="tab-btn" onclick="tab('t2',this)">2. LAN Setup</button>
+        <button class="tab-btn" onclick="tab('t3',this)">3. Get Script</button>
+    </div>
+
+    <div id="t1" class="content active">
+        <div id="list-wan">
+            <div class="row">
+                <div class="grp"><label>Interface Name</label><input type="text" class="i-if" value="ether1-ISP-A"></div>
+                <div class="grp"><label>IP Address</label><input type="text" class="i-ip" value="192.168.100.2/24"></div>
+                <div class="grp"><label>Gateway IP</label><input type="text" class="i-gw" value="192.168.100.1"></div>
+                <div class="grp" style="flex:0.4"><label>Speed (Mb)</label><input type="number" class="i-bw" value="20"></div>
+                <button class="btn btn-del" onclick="del(this)">×</button>
+            </div>
+            <div class="row">
+                <div class="grp"><label>Interface Name</label><input type="text" class="i-if" value="ether2-ISP-B"></div>
+                <div class="grp"><label>IP Address</label><input type="text" class="i-ip" value="192.168.200.2/24"></div>
+                <div class="grp"><label>Gateway IP</label><input type="text" class="i-gw" value="192.168.200.1"></div>
+                <div class="grp" style="flex:0.4"><label>Speed (Mb)</label><input type="number" class="i-bw" value="30"></div>
+                <button class="btn btn-del" onclick="del(this)">×</button>
+            </div>
+        </div>
+        <button class="btn btn-add" onclick="addWan()">+ ADD WAN CONNECTION</button>
+    </div>
+
+    <div id="t2" class="content">
+        <div id="list-lan">
+            <div class="row">
+                <div class="grp"><label>LAN Interface</label><input type="text" class="l-if" value="ether3-LAN"></div>
+                <div class="grp"><label>Gateway IP (Local)</label><input type="text" class="l-ip" value="192.168.2.1/24"></div>
+                <button class="btn btn-del" onclick="del(this)">×</button>
+            </div>
+        </div>
+        <button class="btn btn-add" onclick="addLan()">+ ADD LOCAL NETWORK</button>
+    </div>
+
+    <div id="t3" class="content">
+        <div id="stats" style="color:#2962ff;font-weight:700;font-family:monospace;margin-bottom:10px"></div>
+        <button class="btn btn-gen" onclick="gen()">GENERATE FINAL SCRIPT</button>
+        <textarea id="output" readonly placeholder="Script results will appear here..."></textarea>
+        <button class="btn btn-copy" onclick="copy()">COPY TO CLIPBOARD</button>
+    </div>
+
+    <div class="footer">
+        <div>Support the developer for better tools:</div>
+        <a href="https://saweria.co/SigmaRule" target="_blank" class="donate">☕ Saweria (SigmaRule)</a>
+    </div>
+</div>
+
+<script>
+const D=document;
+function tab(id,btn){
+    D.querySelectorAll('.content').forEach(e=>e.classList.remove('active'));
+    D.querySelectorAll('.tab-btn').forEach(e=>e.classList.remove('active'));
+    D.getElementById(id).classList.add('active');
+    btn.classList.add('active');
+}
+function del(btn){if(confirm("Hapus baris ini?"))btn.parentElement.remove()}
+function addWan(){
+    let d=D.createElement('div');d.className='row';
+    d.innerHTML=`<div class="grp"><label>Interface</label><input type="text" class="i-if"></div>
+    <div class="grp"><label>IP Address</label><input type="text" class="i-ip"></div>
+    <div class="grp"><label>Gateway</label><input type="text" class="i-gw"></div>
+    <div class="grp" style="flex:0.4"><label>Mb</label><input type="number" class="i-bw" value="10"></div>
+    <button class="btn btn-del" onclick="del(this)">×</button>`;
+    D.getElementById('list-wan').appendChild(d);
+}
+function addLan(){
+    let d=D.createElement('div');d.className='row';
+    d.innerHTML=`<div class="grp"><label>Interface</label><input type="text" class="l-if"></div>
+    <div class="grp"><label>IP Gateway</label><input type="text" class="l-ip"></div>
+    <button class="btn btn-del" onclick="del(this)">×</button>`;
+    D.getElementById('list-lan').appendChild(d);
+}
+function gcd(a,b){return b==0?a:gcd(b,a%b)}
+function gen(){
+    let wan=[],lan=[],q=D.querySelectorAll.bind(D);
+    
+    // Collect Data
+    q('#list-wan .row').forEach((r,i)=>{
+        wan.push({
+            n:`ISP-${i+1}`,
+            f:r.querySelector('.i-if').value.trim(),
+            ip:r.querySelector('.i-ip').value.trim(),
+            gw:r.querySelector('.i-gw').value.trim(),
+            bw:parseInt(r.querySelector('.i-bw').value)||1
+        });
+    });
+    q('#list-lan .row').forEach(r=>{
+        lan.push({
+            f:r.querySelector('.l-if').value.trim(),
+            ip:r.querySelector('.l-ip').value.trim()
+        });
+    });
+
+    if(!wan.length || !lan.length){alert("Mohon lengkapi data WAN dan LAN.");return}
+
+    // Calc Ratio
+    let bws=wan.map(x=>x.bw), g=bws[0];
+    for(let i=1;i<bws.length;i++)g=gcd(bws[i],g);
+    let totalStreams=0;
+    wan.forEach(x=>{x.w=x.bw/g;totalStreams+=x.w});
+    
+    D.getElementById('stats').innerText = `System Analysis: Detected ${wan.length} WANs. PCC Total Streams: ${totalStreams}. Ratio: ${wan.map(x=>x.w).join(':')}`;
+
+    // Generate Script
+    let s = `# -----------------------------------------------------\n`;
+    s += `# MIKROTIK PCC V4.1 - PRODUCTION GRADE GENERATOR\n`;
+    s += `# Created by Muhammad Bagus Pribadi\n`;
+    s += `# -----------------------------------------------------\n\n`;
+
+    s += `/log info "Starting PCC Setup V4.1..."\n`;
+    s += `# 1. INTERFACE & ADDRESS LISTS\n`;
+    s += `/interface list add name=WAN_LIST\n/interface list add name=LAN_LIST\n`;
+    
+    // LAN & WAN Config
+    wan.forEach(x=>{
+        s+=`/interface set [find default-name=${x.f}] name="${x.f}"\n`;
+        s+=`/interface list member add interface="${x.f}" list=WAN_LIST\n`;
+        s+=`/ip address add address=${x.ip} interface="${x.f}" comment="${x.n}"\n`;
+    });
+    lan.forEach(x=>{
+        if(!x.f.toLowerCase().includes('vlan')) s+=`/interface set [find default-name=${x.f}] name="${x.f}"\n`;
+        s+=`/interface list member add interface="${x.f}" list=LAN_LIST\n`;
+        s+=`/ip address add address=${x.ip} interface="${x.f}" comment="Local-Net"\n`;
+    });
+
+    s += `\n# 2. LOCAL ADDRESS LIST & BYPASS (RFC1918)\n`;
+    s += `/ip firewall address-list\n`;
+    s += `add list=LOCAL_NET address=192.168.0.0/16\n`;
+    s += `add list=LOCAL_NET address=10.0.0.0/8\n`;
+    s += `add list=LOCAL_NET address=172.16.0.0/12\n`;
+
+    s += `\n# 3. SECURITY & NAT (Strict Mode)\n`;
+    s += `# Disabling FastTrack to ensure PCC packet marking works 100%\n`;
+    s += `/ip firewall filter disable [find action=fasttrack-connection]\n`;
+    s += `/ip dns set servers=8.8.8.8,1.1.1.1 allow-remote-requests=yes\n`;
+    
+    wan.forEach(x=>{
+        s+=`/ip firewall nat add chain=srcnat out-interface="${x.f}" action=masquerade comment="NAT ${x.n}"\n`;
+    });
+
+    s += `\n# 4. MANGLE RULES (Traffic Control)\n/ip firewall mangle\n`;
+    s += `# 4A. ABSOLUTE BYPASS (Router Services & Local Traffic)\n`;
+    // FIX TERAKHIR: Menambahkan dst-address-type=local
+    s += `add chain=prerouting dst-address-type=local action=accept comment="Bypass Router Local IPs"\n`;
+    s += `add chain=prerouting dst-address-list=LOCAL_NET action=accept comment="Bypass Inter-VLAN/Local"\n`;
+
+    s += `\n# 4B. INPUT MARKING (Safe Remote Access)\n`;
+    wan.forEach(x=>{
+        s+=`add chain=input in-interface="${x.f}" action=mark-connection new-connection-mark=${x.n}_conn passthrough=yes\n`;
+    });
+
+    s += `\n# 4C. OUTPUT MARKING (Ensuring Reply Consistency)\n`;
+    wan.forEach(x=>{
+        s+=`add chain=output connection-mark=${x.n}_conn action=mark-routing new-routing-mark=to_${x.n} passthrough=no\n`;
+    });
+
+    s += `\n# 4D. PCC LOAD BALANCING (LAN -> WAN)\n`;
+    let count=0;
+    wan.forEach(x=>{
+        for(let k=0;k<x.w;k++){
+            s+=`add chain=prerouting in-interface-list=LAN_LIST dst-address-list=!LOCAL_NET per-connection-classifier=both-addresses-and-ports:${totalStreams}/${count} connection-mark=no-mark action=mark-connection new-connection-mark=${x.n}_conn passthrough=yes\n`;
+            count++;
+        }
+    });
+
+    s += `\n# 4E. APPLY ROUTING MARKS\n`;
+    wan.forEach(x=>{
+        s+=`add chain=prerouting in-interface-list=LAN_LIST connection-mark=${x.n}_conn action=mark-routing new-routing-mark=to_${x.n} passthrough=no\n`;
+    });
+
+    s += `\n# 5. ROUTING & FAILOVER\n/ip route\n`;
+    wan.forEach(x=>{
+        s+=`# Main Route: ${x.n}\n`;
+        s+=`add dst-address=0.0.0.0/0 gateway=${x.gw} distance=1 routing-mark=to_${x.n} check-gateway=ping\n`;
+        
+        s+=`# Failover Backups (Cross-Routing)\n`;
+        wan.forEach(b=>{
+            if(x.n !== b.n){
+                s+=`add dst-address=0.0.0.0/0 gateway=${b.gw} distance=2 routing-mark=to_${x.n} check-gateway=ping comment="Backup via ${b.n}"\n`;
+            }
+        });
+    });
+
+    s += `\n# 6. DEFAULT ROUTES (Router Traffic Fallback)\n`;
+    // Sort by bandwidth desc for main gateway preference
+    let sortedWan = [...wan].sort((a,b)=>b.bw-a.bw);
+    sortedWan.forEach((x,i)=>{
+        s+=`add dst-address=0.0.0.0/0 gateway=${x.gw} distance=${i+1} check-gateway=ping\n`;
+    });
+
+    D.getElementById('output').value = s;
+}
+
+function copy(){
+    let t=D.getElementById('output');
+    t.select();navigator.clipboard.writeText(t.value);
+    alert("Script copied to clipboard!");
+}
 </script></body></html>
