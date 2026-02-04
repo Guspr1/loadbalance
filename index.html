@@ -3,8 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Mikrotik PCC V4.3 (Same-Gateway Patch)</title>
+<title>Mikrotik PCC V4.4 (Production Grade)</title>
 <style>
+
 body{font-family:sans-serif;background:#050505;color:#ccc;margin:0;padding:20px}
 *{box-sizing:border-box}
 .c{max-width:900px;margin:0 auto;background:#111;border:1px solid #333;border-radius:8px;box-shadow:0 20px 50px rgba(0,0,0,.8)}
@@ -40,7 +41,7 @@ textarea{width:100%;height:400px;background:#080808;color:#a9b7c6;border:1px sol
 <div class="c">
   <div class="h">
     <h2>MIKROTIK PCC GENERATOR</h2>
-    <div class="sub">V4.3 UNIVERSAL (SAME-GW PATCH)</div>
+    <div class="sub">V4.4 PRODUCTION GRADE (FIXED)</div>
     <div class="cr">Created by Muhammad Bagus Pribadi</div>
   </div>
 
@@ -102,23 +103,22 @@ textarea{width:100%;height:400px;background:#080808;color:#a9b7c6;border:1px sol
 
 <script>
 (function(){
-/* Protection Logic: 
-  Logic calculation remains clean for performance.
-  String mapping is used to protect credit.
-*/
+// Array Obfuscation tetap ada untuk Proteksi Kredit & Struktur Dasar
 const _0x5a2f=[
 'document','querySelectorAll','getElementById','input[name="ros"]:checked',
 '.p','.tb','a','classList','remove','add','value','trim','length',
 '.r','#lw','#ll','.if','.ip','.gw','.bw','.lif','.lip','Data Kurang!',
 'LOC','WAN_LIST','LAN_LIST','fasttrack-connection','both-addresses-and-ports',
-'routing-mark','routing-table','fib','v7','v6','ISP-','_conn','to_',
-'Start PCC V4.3','Copied!','%'
+'v7','v6',
+'Start PCC V4.4 (Production)', 'Copied!', '%', 'conn_', 'to_'
 ];
+// Index Helper
 const _=(i)=>_0x5a2f[i];
 const D=window[_('0')];
 const Q=(s)=>D[_('1')](s);
 const I=(s)=>D[_('2')](s);
 
+// UI Logic
 window._x=function(i,e){
 Q(_(4)).forEach(x=>x[_('7')][_('8')](_(6)));
 Q(_(5)).forEach(x=>x[_('7')][_('8')](_(6)));
@@ -138,73 +138,99 @@ I('ll').appendChild(d);
 };
 const G=(a,b)=>b==0?a:G(b,a%b);
 
+// CORE LOGIC (CLEAN NAMING)
 window._gn=function(){
 let w=[],l=[],rv=D.querySelector(_(3))[_('10')];
+
+// Loop Data WAN
 Q(_(14)+' '+_(13)).forEach((r,k)=>{
-w.push({n:_(32)+(k+1),
-f:r.querySelector(_(16))[_('10')][_('11')](),
-i:r.querySelector(_(17))[_('10')][_('11')](),
-g:r.querySelector(_(18))[_('10')][_('11')](),
-b:parseInt(r.querySelector(_(19))[_('10')])||1});
+    let id = k+1;
+    w.push({
+        n: 'ISP'+id, // FIXED: Nama bersih "ISP1", "ISP2"
+        cm: _(33)+'ISP'+id, // conn_ISP1
+        rm: _(34)+'ISP'+id, // to_ISP1
+        f: r.querySelector(_(16))[_('10')][_('11')](),
+        i: r.querySelector(_(17))[_('10')][_('11')](),
+        g: r.querySelector(_(18))[_('10')][_('11')](),
+        b: parseInt(r.querySelector(_(19))[_('10')])||1
+    });
 });
+
+// Loop Data LAN
 Q(_(15)+' '+_(13)).forEach(r=>{
 l.push({f:r.querySelector(_(20))[_('10')][_('11')](),
 i:r.querySelector(_(21))[_('10')][_('11')]()});
 });
+
 if(!w[_('12')]||!l[_('12')])return alert(_(22));
 
+// Math PCC
 let bs=w.map(x=>x.b),g=bs[0];
 for(let i=1;i<bs[_('12')];i++)g=G(bs[i],g);
 let T=0;w.forEach(x=>{x.r=x.b/g;T+=x.r});
 I('st').innerText='ROS: '+rv.toUpperCase()+' | Streams: '+T+' | Ratio: '+w.map(x=>x.r).join(':');
 
-let s='# PCC V4.3 UNIVERSAL ('+rv.toUpperCase()+')\n# Created By Muhammad Bagus Pribadi\n/log info "'+_(36)+'"\n/interface list add name='+_(24)+'\n/interface list add name='+_(25)+'\n/ip firewall address-list\nadd list='+_(23)+' address=192.168.0.0/16\nadd list='+_(23)+' address=10.0.0.0/8\nadd list='+_(23)+' address=172.16.0.0/12\n/ip firewall filter disable [find action='+_(26)+']\n/ip dns set servers=8.8.8.8,1.1.1.1 allow-remote-requests=yes\n';
+// Generate Script Header
+let s='# PCC V4.4 PRODUCTION ('+rv.toUpperCase()+')\n# Created By Muhammad Bagus Pribadi\n/log info "'+_(30)+'"\n/interface list add name='+_(24)+'\n/interface list add name='+_(25)+'\n/ip firewall address-list\nadd list='+_(23)+' address=192.168.0.0/16\nadd list='+_(23)+' address=10.0.0.0/8\nadd list='+_(23)+' address=172.16.0.0/12\n/ip firewall filter disable [find action='+_(26)+']\n/ip dns set servers=8.8.8.8,1.1.1.1 allow-remote-requests=yes\n';
 
+// WAN Config & Mangle Dasar
 w.forEach(x=>{
-s+='/interface set [find default-name='+x.f+'] name="'+x.f+'"\n/interface list member add interface="'+x.f+'" list='+_(24)+'\n/ip address add address='+x.i+' interface="'+x.f+'" comment="'+x.n+'"\n/ip firewall nat add chain=srcnat out-interface="'+x.f+'" action=masquerade comment="NAT-'+x.n+'"\nadd chain=input in-interface="'+x.f+'" action=mark-connection new-connection-mark='+x.n+_(33)+' passthrough=yes\nadd chain=output connection-mark='+x.n+_(33)+' action=mark-routing new-routing-mark='+_(34)+x.n+' passthrough=no\n';
+s+='/interface set [find default-name='+x.f+'] name="'+x.f+'"\n/interface list member add interface="'+x.f+'" list='+_(24)+'\n/ip address add address='+x.i+' interface="'+x.f+'" comment="'+x.n+'"\n/ip firewall nat add chain=srcnat out-interface="'+x.f+'" action=masquerade comment="NAT-'+x.n+'"\nadd chain=input in-interface="'+x.f+'" action=mark-connection new-connection-mark='+x.cm+' passthrough=yes\nadd chain=output connection-mark='+x.cm+' action=mark-routing new-routing-mark='+x.rm+' passthrough=no\n';
 });
+
+// LAN Config
 l.forEach(x=>{
 if(!x.f.toLowerCase().includes('vlan'))s+='/interface set [find default-name='+x.f+'] name="'+x.f+'"\n';
 s+='/interface list member add interface="'+x.f+'" list='+_(25)+'\n/ip address add address='+x.i+' interface="'+x.f+'" comment="Local"\n';
 });
+
+// Mangle PCC Loop
 s+='/ip firewall mangle\nadd chain=prerouting dst-address-type=local action=accept\nadd chain=prerouting dst-address-list='+_(23)+' action=accept\n';
 let c=0;
 w.forEach(x=>{
 for(let k=0;k<x.r;k++){
-s+='add chain=prerouting in-interface-list='+_(25)+' dst-address-list=!'+_(23)+' per-connection-classifier='+_(27)+':'+T+'/'+c+' connection-mark=no-mark action=mark-connection new-connection-mark='+x.n+_(33)+' passthrough=yes\n';
+s+='add chain=prerouting in-interface-list='+_(25)+' dst-address-list=!'+_(23)+' per-connection-classifier='+_(27)+':'+T+'/'+c+' connection-mark=no-mark action=mark-connection new-connection-mark='+x.cm+' passthrough=yes\n';
 c++;
 }
-s+='add chain=prerouting in-interface-list='+_(25)+' connection-mark='+x.n+_(33)+' action=mark-routing new-routing-mark='+_(34)+x.n+' passthrough=no\n';
+s+='add chain=prerouting in-interface-list='+_(25)+' connection-mark='+x.cm+' action=mark-routing new-routing-mark='+x.rm+' passthrough=no\n';
 });
-if(rv===_(35)){
-s+='/routing table\n';
-w.forEach(x=>{s+='add name='+_(34)+x.n+' '+_(30)+'\n';});
-}
-s+='/ip route\n';
 
-// LOGIC ROUTE PATCHED FOR SAME GATEWAY
+// Routing Table (V7 only)
+if(rv===_(28)){
+s+='/routing table\n';
+w.forEach(x=>{s+='add name='+x.rm+' fib\n';});
+}
+
+// Routes (Fixed Same-Gateway logic & Naming)
+s+='/ip route\n';
 w.forEach(x=>{
-let m=rv===_(35)?'routing-table=':'routing-mark=';
-let gw=x.g+_(38)+x.f; // Syntax: IP%Interface
-s+='add dst-address=0.0.0.0/0 gateway='+gw+' distance=1 '+m+_(34)+x.n+' check-gateway=ping\n';
+let m=rv===_(28)?'routing-table=':'routing-mark=';
+let gw=x.g+_(32)+x.f; // IP%Interface
+s+='add dst-address=0.0.0.0/0 gateway='+gw+' distance=1 '+m+x.rm+' check-gateway=ping\n';
+// Failover routes
 w.forEach(b=>{
 if(x.n!==b.n){
-let gwb=b.g+_(38)+b.f; // Syntax: IP%Interface
-s+='add dst-address=0.0.0.0/0 gateway='+gwb+' distance=2 '+m+_(34)+x.n+' check-gateway=ping\n';
+let gwb=b.g+_(32)+b.f; 
+s+='add dst-address=0.0.0.0/0 gateway='+gwb+' distance=2 '+m+x.rm+' check-gateway=ping\n';
 }
 });
 });
+
+// Main Route (ECMP / Default)
 w.sort((a,b)=>b.b-a.b).forEach((x,i)=>{
-let gw=x.g+_(38)+x.f; // Syntax: IP%Interface
+let gw=x.g+_(32)+x.f;
 s+='add dst-address=0.0.0.0/0 gateway='+gw+' distance='+(i+1)+' check-gateway=ping\n';
 });
+
+// Security Patch
 s+='\n# SECURITY PATCH\n/ip firewall filter\nadd chain=input protocol=udp dst-port=53 in-interface-list='+_(24)+' action=drop\nadd chain=input protocol=tcp dst-port=53 in-interface-list='+_(24)+' action=drop\n';
+
 I('ou').value=s;
 };
 
 window._cp=function(){
 let e=I('ou');e.select();navigator.clipboard.writeText(e.value);
-alert(_(37));
+alert(_(31));
 };
 })();
 </script>
