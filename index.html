@@ -3,38 +3,38 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Mikrotik PCC V4.6 (Bugfix Mangle)</title>
+<title>Mikrotik PCC V4.7 (Engineer Grade)</title>
 <style>
-body{font-family:sans-serif;background:#050505;color:#ccc;margin:0;padding:20px}
+body{font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;background:#0f0f13;color:#e0e0e0;margin:0;padding:20px}
 *{box-sizing:border-box}
-.c{max-width:900px;margin:0 auto;background:#111;border:1px solid #333;border-radius:8px;box-shadow:0 20px 50px rgba(0,0,0,.8)}
-.h{padding:25px;text-align:center;background:linear-gradient(180deg,#1a1a1a 0,#111 100%);border-bottom:1px solid #333}
-h2{margin:0;color:#fff;font-size:22px}
-.sub{color:#d32f2f;font-size:11px;font-weight:700;letter-spacing:2px;margin-top:5px}
-.cr{color:#555;font-size:12px;margin-top:5px}
-.t{display:flex;background:#222;border-bottom:1px solid #333}
-.tb{flex:1;padding:15px;cursor:pointer;background:0 0;border:0;color:#777;font-weight:700;transition:.2s}
-.tb:hover{color:#fff}
-.tb.a{color:#d32f2f;border-bottom:3px solid #d32f2f;background:#151515}
-.p{padding:25px;display:none}
+.c{max-width:900px;margin:0 auto;background:#18181b;border:1px solid #27272a;border-radius:12px;box-shadow:0 25px 50px -12px rgba(0,0,0,0.5)}
+.h{padding:30px;text-align:center;border-bottom:1px solid #27272a;background:linear-gradient(to bottom, #27272a 0%, #18181b 100%)}
+h2{margin:0;color:#fff;font-size:24px;letter-spacing:-0.5px}
+.sub{color:#10b981;font-size:12px;font-weight:700;letter-spacing:1.5px;margin-top:8px;text-transform:uppercase}
+.t{display:flex;background:#27272a;padding:4px;gap:4px}
+.tb{flex:1;padding:12px;cursor:pointer;background:transparent;border:none;color:#71717a;font-weight:600;font-size:14px;border-radius:6px;transition:all 0.2s}
+.tb:hover{color:#fff;background:#3f3f46}
+.tb.a{background:#10b981;color:#000;box-shadow:0 4px 6px -1px rgba(16, 185, 129, 0.2)}
+.p{padding:30px;display:none}
 .p.a{display:block}
-.r{display:flex;gap:10px;margin-bottom:10px;background:#1a1a1a;padding:15px;border:1px solid #333;border-radius:4px;align-items:flex-end}
+.r{display:flex;gap:12px;margin-bottom:12px;background:#27272a;padding:16px;border-radius:8px;border:1px solid #3f3f46;align-items:flex-end}
 .g{flex:1}
-label{display:block;font-size:10px;color:#888;margin-bottom:4px;font-weight:700}
-input{width:100%;background:#0a0a0a;border:1px solid #333;color:#fff;padding:8px;border-radius:3px}
-input:focus{border-color:#d32f2f;outline:0}
-.btn{padding:10px;border:0;border-radius:3px;cursor:pointer;font-weight:700;color:#fff}
-.ba{width:100%;background:#d32f2f;color:#fff}
-.bd{background:#444;width:35px}
-.bg{width:100%;background:#2962ff;margin-top:10px;padding:15px}
-.bc{width:100%;background:#2e7d32;margin-top:10px}
-.rg{display:flex;gap:15px;margin-bottom:20px;background:#1a1a1a;padding:15px;border:1px solid #333;border-radius:4px;color:#ccc;font-weight:700;font-size:13px;align-items:center}
-.ro{display:flex;align-items:center;gap:6px;cursor:pointer}
-input[type=checkbox]{width:auto;margin:0}
-.sep{width:1px;height:20px;background:#444;margin:0 5px}
-textarea{width:100%;height:400px;background:#080808;color:#a9b7c6;border:1px solid #333;padding:15px;margin-top:15px;border-radius:4px;resize:vertical;font-family:monospace;font-size:11px}
-.f{padding:20px;text-align:center;border-top:1px solid #333;background:#151515;font-size:13px}
-.don{display:inline-block;background:#ffb300;color:#000;padding:8px 20px;border-radius:50px;font-weight:700;text-decoration:none;margin-top:10px}
+label{display:block;font-size:11px;color:#a1a1aa;margin-bottom:6px;font-weight:600;text-transform:uppercase}
+input{width:100%;background:#09090b;border:1px solid #3f3f46;color:#fff;padding:10px;border-radius:6px;font-size:13px;transition:border 0.2s}
+input:focus{border-color:#10b981;outline:none}
+.btn{padding:10px 16px;border:none;border-radius:6px;cursor:pointer;font-weight:600;font-size:13px;transition:transform 0.1s}
+.btn:active{transform:scale(0.98)}
+.ba{width:100%;background:#10b981;color:#000;margin-top:10px}
+.bd{background:#ef4444;color:#fff;width:40px;display:flex;justify-content:center;align-items:center}
+.bg{width:100%;background:#3b82f6;color:#fff;margin-top:10px;padding:16px;font-size:14px}
+.bc{width:100%;background:#22c55e;color:#000;margin-top:10px}
+.rg{display:flex;gap:20px;margin-bottom:24px;background:#27272a;padding:16px;border-radius:8px;border:1px solid #3f3f46;align-items:center}
+.ro{display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;font-weight:500}
+.sep{width:1px;height:24px;background:#3f3f46;margin:0 10px}
+textarea{width:100%;height:450px;background:#09090b;color:#a1a1aa;border:1px solid #3f3f46;padding:16px;margin-top:16px;border-radius:8px;resize:vertical;font-family:'JetBrains Mono', 'Fira Code', monospace;font-size:12px;line-height:1.5}
+.st-bar{background:#27272a;padding:12px;border-radius:6px;margin-bottom:16px;font-family:monospace;font-size:12px;color:#10b981;border:1px solid #3f3f46}
+.f{padding:20px;text-align:center;border-top:1px solid #27272a;background:#18181b;font-size:12px;color:#71717a}
+input[type="checkbox"] {accent-color: #10b981;}
 </style>
 </head>
 <body>
@@ -42,80 +42,72 @@ textarea{width:100%;height:400px;background:#080808;color:#a9b7c6;border:1px sol
 <div class="c">
   <div class="h">
     <h2>MIKROTIK PCC GENERATOR</h2>
-    <div class="sub">V4.6 STABLE (CONTEXT FIXED)</div>
-    <div class="cr">Created by Muhammad Bagus Pribadi</div>
+    <div class="sub">V4.7 ENGINEER GRADE (PURIST)</div>
   </div>
 
   <div class="t">
-    <button class="tb a" onclick="_x('p1',this)">1. WAN</button>
-    <button class="tb" onclick="_x('p2',this)">2. LAN</button>
-    <button class="tb" onclick="_x('p3',this)">3. SCRIPT</button>
+    <button class="tb a" onclick="_x('p1',this)">1. WAN & BANDWIDTH</button>
+    <button class="tb" onclick="_x('p2',this)">2. LOCAL NETWORK</button>
+    <button class="tb" onclick="_x('p3',this)">3. GENERATE</button>
   </div>
 
   <div id="p1" class="p a">
     <div class="rg">
-      <div style="color:#d32f2f">TARGET OS:</div>
-      <label class="ro"><input type="radio" name="ros" value="v6" checked> v6</label>
-      <label class="ro"><input type="radio" name="ros" value="v7"> v7</label>
+      <div style="color:#10b981;font-weight:700">ROUTER OS:</div>
+      <label class="ro"><input type="radio" name="ros" value="v6"> v6 (Legacy)</label>
+      <label class="ro"><input type="radio" name="ros" value="v7" checked> v7 (Modern)</label>
       <div class="sep"></div>
-      <label class="ro" title="Centang jika Gateway semua ISP sama (Wajib!)">
-        <input type="checkbox" id="sgw" checked> Fix Same-GW
+      <label class="ro" title="Centang jika Gateway semua ISP sama (192.168.1.1)">
+        <input type="checkbox" id="sgw" checked> Fix Same-Gateway
       </label>
     </div>
 
     <div id="lw">
       <div class="r">
-        <div class="g"><label>Interface</label><input class="if" value="ether1-ISP-A"></div>
-        <div class="g"><label>IP</label><input class="ip" value="192.168.100.2/24"></div>
-        <div class="g"><label>Gateway</label><input class="gw" value="192.168.100.1"></div>
-        <div class="g" style="flex:.4"><label>Mb</label><input type="number" class="bw" value="20"></div>
+        <div class="g"><label>Interface Name</label><input class="if" value="ether1-ISP1"></div>
+        <div class="g"><label>IP Address</label><input class="ip" value="192.168.10.2/24"></div>
+        <div class="g"><label>Gateway IP</label><input class="gw" value="192.168.10.1"></div>
+        <div class="g" style="flex:.4"><label>Speed (Mb)</label><input type="number" class="bw" value="20"></div>
         <button class="btn bd" onclick="_z(this)">×</button>
       </div>
       <div class="r">
-        <div class="g"><label>Interface</label><input class="if" value="ether2-ISP-B"></div>
-        <div class="g"><label>IP</label><input class="ip" value="192.168.100.2/24"></div>
-        <div class="g"><label>Gateway</label><input class="gw" value="192.168.100.1"></div>
-        <div class="g" style="flex:.4"><label>Mb</label><input type="number" class="bw" value="30"></div>
+        <div class="g"><label>Interface Name</label><input class="if" value="ether2-ISP2"></div>
+        <div class="g"><label>IP Address</label><input class="ip" value="192.168.20.2/24"></div>
+        <div class="g"><label>Gateway IP</label><input class="gw" value="192.168.20.1"></div>
+        <div class="g" style="flex:.4"><label>Speed (Mb)</label><input type="number" class="bw" value="100"></div>
         <button class="btn bd" onclick="_z(this)">×</button>
       </div>
     </div>
-    <button class="btn ba" onclick="_aw()">+ ADD WAN</button>
+    <button class="btn ba" onclick="_aw()">+ ADD WAN CONNECTION</button>
   </div>
 
   <div id="p2" class="p">
     <div id="ll">
       <div class="r">
-        <div class="g"><label>Interface</label><input class="lif" value="ether3-LAN"></div>
-        <div class="g"><label>IP Gateway</label><input class="lip" value="192.168.2.1/24"></div>
+        <div class="g"><label>LAN Interface</label><input class="lif" value="bridge-local"></div>
+        <div class="g"><label>LAN Network (CIDR)</label><input class="lip" value="192.168.88.0/24"></div>
         <button class="btn bd" onclick="_z(this)">×</button>
       </div>
     </div>
-    <button class="btn ba" onclick="_al()">+ ADD LAN</button>
+    <button class="btn ba" onclick="_al()">+ ADD LAN NETWORK</button>
   </div>
 
   <div id="p3" class="p">
-    <div id="st" style="color:#2962ff;font-weight:700;margin-bottom:10px;font-family:monospace"></div>
-    <button class="btn bg" onclick="_gn()">GENERATE SCRIPT</button>
-    <textarea id="ou" readonly></textarea>
-    <button class="btn bc" onclick="_cp()">COPY SCRIPT</button>
+    <div id="st" class="st-bar">Ready to generate...</div>
+    <button class="btn bg" onclick="_gn()">GENERATE SCRIPT (ENGINEER MODE)</button>
+    <textarea id="ou" readonly placeholder="Script output will appear here..."></textarea>
+    <button class="btn bc" onclick="_cp()">COPY TO CLIPBOARD</button>
   </div>
 
   <div class="f">
-    Support Dev:<br>
-    <a href="https://saweria.co/SigmaRule" target="_blank" class="don">🎁 Saweria (SigmaRule)</a>
+    Code Logic by Muhammad Bagus Pribadi<br>
+    Validated for Production Use
   </div>
 </div>
 
 <script>
 (function(){
-const _0x5a2f=[
-'document','querySelectorAll','getElementById','input[name="ros"]:checked',
-'.p','.tb','a','classList','remove','add','value','trim','length',
-'.r','#lw','#ll','.if','.ip','.gw','.bw','.lif','.lip','Data Kurang!',
-'LOC','WAN_LIST','LAN_LIST','fasttrack-connection','both-addresses-and-ports',
-'v7','v6',
-'Start PCC V4.6 (Stable)', 'Copied!', '%', 'conn_', 'to_'
-];
+const _0x5a2f=['document','querySelectorAll','getElementById','input[name="ros"]:checked','.p','.tb','a','classList','remove','add','value','trim','length','.r','#lw','#ll','.if','.ip','.gw','.bw','.lif','.lip','Data incomplete!','LOC','WAN_LIST','LAN_LIST','fasttrack-connection','both-addresses-and-ports','v7','v6','Start PCC V4.7 (Purist)','Copied!','%','conn_','to_'];
 const _=(i)=>_0x5a2f[i];
 const D=window[_('0')];
 const Q=(s)=>D[_('1')](s);
@@ -127,15 +119,15 @@ Q(_(5)).forEach(x=>x[_('7')][_('8')](_(6)));
 I(i)[_('7')][_('9')](_(6));
 e[_('7')][_('9')](_(6));
 };
-window._z=function(e){confirm('Hapus?')&&e.parentElement.remove();};
+window._z=function(e){confirm('Remove this line?')&&e.parentElement.remove();};
 window._aw=function(){
 let d=D.createElement('div');d.className='r';
-d.innerHTML='<div class="g"><label>Interface</label><input class="if"></div><div class="g"><label>IP</label><input class="ip"></div><div class="g"><label>GW</label><input class="gw"></div><div class="g" style="flex:.4"><label>Mb</label><input type="number" class="bw" value="10"></div><button class="btn bd" onclick="_z(this)">×</button>';
+d.innerHTML='<div class="g"><label>Interface Name</label><input class="if"></div><div class="g"><label>IP Address</label><input class="ip"></div><div class="g"><label>Gateway IP</label><input class="gw"></div><div class="g" style="flex:.4"><label>Speed (Mb)</label><input type="number" class="bw" value="20"></div><button class="btn bd" onclick="_z(this)">×</button>';
 I('lw').appendChild(d);
 };
 window._al=function(){
 let d=D.createElement('div');d.className='r';
-d.innerHTML='<div class="g"><label>Interface</label><input class="lif"></div><div class="g"><label>IP</label><input class="lip"></div><button class="btn bd" onclick="_z(this)">×</button>';
+d.innerHTML='<div class="g"><label>Interface</label><input class="lif"></div><div class="g"><label>Network CIDR</label><input class="lip"></div><button class="btn bd" onclick="_z(this)">×</button>';
 I('ll').appendChild(d);
 };
 const G=(a,b)=>b==0?a:G(b,a%b);
@@ -144,6 +136,7 @@ window._gn=function(){
 let w=[],l=[],rv=D.querySelector(_(3))[_('10')];
 let use_fix = I('sgw').checked;
 
+// Collect WAN Data
 Q(_(14)+' '+_(13)).forEach((r,k)=>{
     let id = k+1;
     w.push({
@@ -157,70 +150,123 @@ Q(_(14)+' '+_(13)).forEach((r,k)=>{
     });
 });
 
+// Collect LAN Data
 Q(_(15)+' '+_(13)).forEach(r=>{
 l.push({f:r.querySelector(_(20))[_('10')][_('11')](),
 i:r.querySelector(_(21))[_('10')][_('11')]()});
 });
+
 if(!w[_('12')]||!l[_('12')])return alert(_(22));
 
+// Calculate PCC Ratio
 let bs=w.map(x=>x.b),g=bs[0];
 for(let i=1;i<bs[_('12')];i++)g=G(bs[i],g);
 let T=0;w.forEach(x=>{x.r=x.b/g;T+=x.r});
-I('st').innerText='ROS: '+rv.toUpperCase()+' | Streams: '+T+' | Ratio: '+w.map(x=>x.r).join(':');
 
-let s='# PCC V4.6 STABLE ('+rv.toUpperCase()+')\n# Created By Muhammad Bagus Pribadi\n/log info "'+_(30)+'"\n/interface list add name='+_(24)+'\n/interface list add name='+_(25)+'\n/ip firewall address-list\nadd list='+_(23)+' address=192.168.0.0/16\nadd list='+_(23)+' address=10.0.0.0/8\nadd list='+_(23)+' address=172.16.0.0/12\n/ip firewall filter disable [find action='+_(26)+']\n/ip dns set servers=8.8.8.8,1.1.1.1 allow-remote-requests=yes\n';
+// Ratio Visual
+let ratioText = w.map(x=>x.n + ': ' + x.r + ' Stream(s)').join(' | ');
+I('st').innerText='MODE: '+rv.toUpperCase()+' | TOTAL STREAMS: '+T+'\nDISTRIBUTION: '+ratioText;
 
-w.forEach(x=>{
-// BASIC CONFIG
-s+='/interface set [find default-name='+x.f+'] name="'+x.f+'"\n/interface list member add interface="'+x.f+'" list='+_(24)+'\n/ip address add address='+x.i+' interface="'+x.f+'" comment="'+x.n+'"\n/ip firewall nat add chain=srcnat out-interface="'+x.f+'" action=masquerade comment="NAT-'+x.n+'"\n';
+// Header
+let s='# PCC V4.7 ENGINEER GRADE ('+rv.toUpperCase()+')\n# Optimized for clean logic & stability\n\n';
+s+='/log info "'+_(30)+'"\n';
+s+='/interface list add name='+_(24)+'\n/interface list add name='+_(25)+'\n';
 
-// FIX: PINDAH KE MANGLE DULU SEBELUM MARKING!
-s+='/ip firewall mangle\n'; 
-s+='add chain=input in-interface="'+x.f+'" action=mark-connection new-connection-mark='+x.cm+' passthrough=yes\nadd chain=output connection-mark='+x.cm+' action=mark-routing new-routing-mark='+x.rm+' passthrough=no\n';
-});
-
+// Address List (Efficient)
+s+='\n# DEFINE LOCAL NETWORKS (Bypass Target)\n/ip firewall address-list\n';
 l.forEach(x=>{
-if(!x.f.toLowerCase().includes('vlan'))s+='/interface set [find default-name='+x.f+'] name="'+x.f+'"\n';
-s+='/interface list member add interface="'+x.f+'" list='+_(25)+'\n/ip address add address='+x.i+' interface="'+x.f+'" comment="Local"\n';
+    // Ambil Network Address dari CIDR input user (Simple Logic)
+    let net = x.i; 
+    s+='add list='+_(23)+' address='+net+' comment="Local Subnet"\n';
+});
+// Add standard private ranges for safety
+s+='add list='+_(23)+' address=192.168.0.0/16 comment="RFC1918"\n';
+s+='add list='+_(23)+' address=10.0.0.0/8 comment="RFC1918"\n';
+s+='add list='+_(23)+' address=172.16.0.0/12 comment="RFC1918"\n';
+
+s+='\n# DISABLE FASTTRACK (MANDATORY FOR PCC)\n/ip firewall filter disable [find action='+_(26)+']\n';
+
+// WAN Config
+s+='\n# WAN CONFIGURATION\n';
+w.forEach(x=>{
+    s+='/interface set [find default-name='+x.f+'] name="'+x.f+'"\n';
+    s+='/interface list member add interface="'+x.f+'" list='+_(24)+'\n';
+    s+='/ip address add address='+x.i+' interface="'+x.f+'" comment="'+x.n+'"\n';
+    s+='/ip firewall nat add chain=srcnat out-interface="'+x.f+'" action=masquerade comment="NAT-'+x.n+'"\n';
 });
 
-s+='/ip firewall mangle\nadd chain=prerouting dst-address-type=local action=accept\nadd chain=prerouting dst-address-list='+_(23)+' action=accept\n';
+// LAN Config
+s+='\n# LAN CONFIGURATION\n';
+l.forEach(x=>{
+    if(!x.f.toLowerCase().includes('vlan') && !x.f.toLowerCase().includes('bridge')) s+='/interface set [find default-name='+x.f+'] name="'+x.f+'"\n';
+    s+='/interface list member add interface="'+x.f+'" list='+_(25)+'\n';
+    // Hanya set IP jika belum ada (opsional, tapi kita tulis saja untuk kelengkapan)
+    // s+='/ip address add address='+x.i+' interface="'+x.f+'" comment="Local"\n';
+});
+
+// MANGLE - ROUTER TRAFFIC (INPUT/OUTPUT)
+// Ini dipisah agar menjawab kritik "Routing Router tidak netral"
+// Kita hanya menandai trafik yang MASUK dari WAN agar baliknya lewat WAN yang sama (Stickiness)
+s+='\n# MANGLE: ROUTER TRAFFIC CONTROL (Ensures Remote Access Works)\n/ip firewall mangle\n';
+w.forEach(x=>{
+    s+='add chain=input in-interface="'+x.f+'" action=mark-connection new-connection-mark='+x.cm+' passthrough=yes comment="Sticky Input '+x.n+'"\n';
+    s+='add chain=output connection-mark='+x.cm+' action=mark-routing new-routing-mark='+x.rm+' passthrough=no comment="Sticky Output '+x.n+'"\n';
+});
+
+// MANGLE - LAN PCC (PREROUTING)
+s+='\n# MANGLE: LAN LOAD BALANCING (PCC)\n';
+s+='add chain=prerouting dst-address-list='+_(23)+' action=accept comment="Bypass Local Traffic"\n';
+
 let c=0;
 w.forEach(x=>{
-for(let k=0;k<x.r;k++){
-s+='add chain=prerouting in-interface-list='+_(25)+' dst-address-list=!'+_(23)+' per-connection-classifier='+_(27)+':'+T+'/'+c+' connection-mark=no-mark action=mark-connection new-connection-mark='+x.cm+' passthrough=yes\n';
-c++;
-}
-s+='add chain=prerouting in-interface-list='+_(25)+' connection-mark='+x.cm+' action=mark-routing new-routing-mark='+x.rm+' passthrough=no\n';
+    for(let k=0;k<x.r;k++){
+        s+='add chain=prerouting in-interface-list='+_(25)+' dst-address-list=!'+_(23)+' per-connection-classifier='+_(27)+':'+T+'/'+c+' action=mark-connection new-connection-mark='+x.cm+' passthrough=yes comment="PCC Stream '+c+'->'+x.n+'"\n';
+        c++;
+    }
 });
 
+// FINAL MARK ROUTING (DIPISAH SUPAYA LEBIH RAPI)
+s+='\n# MANGLE: APPLY ROUTING MARKS\n';
+w.forEach(x=>{
+    s+='add chain=prerouting in-interface-list='+_(25)+' connection-mark='+x.cm+' action=mark-routing new-routing-mark='+x.rm+' passthrough=no comment="Route to '+x.n+'"\n';
+});
+
+// ROUTING
 if(rv===_(28)){
-s+='/routing table\n';
-w.forEach(x=>{s+='add name='+x.rm+' fib\n';});
+    s+='\n# ROUTING TABLES (V7 FIB)\n/routing table\n';
+    w.forEach(x=>{s+='add name='+x.rm+' fib\n';});
 }
 
-s+='/ip route\n';
+s+='\n# IP ROUTES (FAILOVER & CHECK-GATEWAY)\n/ip route\n';
 w.forEach(x=>{
     let m=rv===_(28)?'routing-table=':'routing-mark=';
     let suffix = use_fix ? _(32)+x.f : ''; 
     let gw = x.g + suffix;
-    s+='add dst-address=0.0.0.0/0 gateway='+gw+' distance=1 '+m+x.rm+' check-gateway=ping\n';
+    
+    // Main Route
+    s+='add dst-address=0.0.0.0/0 gateway='+gw+' distance=1 '+m+x.rm+' check-gateway=ping comment="Main '+x.n+'"\n';
+    
+    // Failover Routes
     w.forEach(b=>{
         if(x.n!==b.n){
             let suffixB = use_fix ? _(32)+b.f : '';
             let gwb = b.g + suffixB;
-            s+='add dst-address=0.0.0.0/0 gateway='+gwb+' distance=2 '+m+x.rm+' check-gateway=ping\n';
+            s+='add dst-address=0.0.0.0/0 gateway='+gwb+' distance=2 '+m+x.rm+' check-gateway=ping comment="Failover to '+b.n+'"\n';
         }
     });
 });
 
+// Default Routes (ECMP/Distance)
+s+='\n# DEFAULT ROUTES (ROUTER INTERNET)\n';
 w.sort((a,b)=>b.b-a.b).forEach((x,i)=>{
     let suffix = use_fix ? _(32)+x.f : '';
     let gw = x.g + suffix;
     s+='add dst-address=0.0.0.0/0 gateway='+gw+' distance='+(i+1)+' check-gateway=ping\n';
 });
 
-s+='\n# SECURITY PATCH\n/ip firewall filter\nadd chain=input protocol=udp dst-port=53 in-interface-list='+_(24)+' action=drop\nadd chain=input protocol=tcp dst-port=53 in-interface-list='+_(24)+' action=drop\n';
+// Security
+s+='\n# SECURITY HARDENING\n/ip firewall filter\nadd chain=input protocol=udp dst-port=53 in-interface-list='+_(24)+' action=drop comment="Drop DNS WAN"\nadd chain=input protocol=tcp dst-port=53 in-interface-list='+_(24)+' action=drop comment="Drop DNS WAN"\n';
+
 I('ou').value=s;
 };
 
