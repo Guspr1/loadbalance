@@ -35,6 +35,9 @@ textarea{width:100%;height:450px;background:#09090b;color:#a1a1aa;border:1px sol
 .st-bar{background:#27272a;padding:12px;border-radius:6px;margin-bottom:16px;font-family:monospace;font-size:12px;color:#10b981;border:1px solid #3f3f46}
 .f{padding:20px;text-align:center;border-top:1px solid #27272a;background:#18181b;font-size:12px;color:#71717a}
 input[type="checkbox"] {accent-color: #10b981;}
+/* Saweria Button Style */
+.don{display:inline-block;background:#eab308;color:#000;padding:10px 25px;border-radius:50px;font-weight:800;text-decoration:none;margin-top:15px;font-size:13px;transition:all 0.2s;border:2px solid #eab308}
+.don:hover{background:transparent;color:#eab308;box-shadow:0 0 15px rgba(234, 179, 8, 0.3)}
 </style>
 </head>
 <body>
@@ -100,8 +103,9 @@ input[type="checkbox"] {accent-color: #10b981;}
   </div>
 
   <div class="f">
-    Code Logic by Muhammad Bagus Pribadi<br>
-    Validated for Production Use
+    Code Logic by <b>Muhammad Bagus Pribadi</b><br>
+    Validated for Production Use<br><br>
+    <a href="https://saweria.co/SigmaRule" target="_blank" class="don">🎁 Support Developer (Saweria)</a>
   </div>
 </div>
 
@@ -175,7 +179,6 @@ s+='/interface list add name='+_(24)+'\n/interface list add name='+_(25)+'\n';
 // Address List (Efficient)
 s+='\n# DEFINE LOCAL NETWORKS (Bypass Target)\n/ip firewall address-list\n';
 l.forEach(x=>{
-    // Ambil Network Address dari CIDR input user (Simple Logic)
     let net = x.i; 
     s+='add list='+_(23)+' address='+net+' comment="Local Subnet"\n';
 });
@@ -200,13 +203,9 @@ s+='\n# LAN CONFIGURATION\n';
 l.forEach(x=>{
     if(!x.f.toLowerCase().includes('vlan') && !x.f.toLowerCase().includes('bridge')) s+='/interface set [find default-name='+x.f+'] name="'+x.f+'"\n';
     s+='/interface list member add interface="'+x.f+'" list='+_(25)+'\n';
-    // Hanya set IP jika belum ada (opsional, tapi kita tulis saja untuk kelengkapan)
-    // s+='/ip address add address='+x.i+' interface="'+x.f+'" comment="Local"\n';
 });
 
 // MANGLE - ROUTER TRAFFIC (INPUT/OUTPUT)
-// Ini dipisah agar menjawab kritik "Routing Router tidak netral"
-// Kita hanya menandai trafik yang MASUK dari WAN agar baliknya lewat WAN yang sama (Stickiness)
 s+='\n# MANGLE: ROUTER TRAFFIC CONTROL (Ensures Remote Access Works)\n/ip firewall mangle\n';
 w.forEach(x=>{
     s+='add chain=input in-interface="'+x.f+'" action=mark-connection new-connection-mark='+x.cm+' passthrough=yes comment="Sticky Input '+x.n+'"\n';
@@ -225,7 +224,7 @@ w.forEach(x=>{
     }
 });
 
-// FINAL MARK ROUTING (DIPISAH SUPAYA LEBIH RAPI)
+// FINAL MARK ROUTING
 s+='\n# MANGLE: APPLY ROUTING MARKS\n';
 w.forEach(x=>{
     s+='add chain=prerouting in-interface-list='+_(25)+' connection-mark='+x.cm+' action=mark-routing new-routing-mark='+x.rm+' passthrough=no comment="Route to '+x.n+'"\n';
